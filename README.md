@@ -1,6 +1,6 @@
 # UF Data Quality Improvement
 
-Project to improve UF VIVO data quality and accuracy
+Project to improve UF VIVO data quality and accuracy.  Python programs and SPARQL scripts are used to find and fix data quality issues.  Additional Python programs support basic ingest for UF data sources.  See the project wiki for additional information. Project folders are described below.
 
 ## Papers
 
