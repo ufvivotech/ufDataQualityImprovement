@@ -40,6 +40,12 @@
       -- show the current time on the console at the start of each major step in the work
       -- move make dictionary and find functions to vivotools
 
+      Version 1.2.1 MC 2013-04-06
+      -- Fix bug regarding disambiguated UF authors.  Version 1.2 erroneously
+         created concatenated URIs in Authorships and authorInAuthorship. 1.2.1
+         picks a URI.  This is consistent with previous versions.
+      -- Updated harvestedBy text to indicate version 1.2.1
+
     Proposed future features
       -- add PMID, PMCID and Grants cited to papers that appear in PubMed
       -- Move reusable code to vivotools
@@ -139,7 +145,7 @@ def make_datetime_rdf(value,title):
         <rdf:type rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <core:dateTimePrecision rdf:resource="http://vivoweb.org/ontology/core#yearMonthPrecision"/>
         <core:dateTime>{{pub_datetime}}</core:dateTime>
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -243,7 +249,7 @@ def make_publisher_rdf(value):
         <rdf:type rdf:resource="http://vivoweb.org/ontology/core#Publisher"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -303,7 +309,7 @@ def make_journal_rdf(value,journal_create,journal_name,journal_uri):
         {{if len(issn) > 0 :}}
             <bibo:issn>{{issn}}</bibo:issn>
         {{endif}}
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -329,12 +335,12 @@ def make_publisher_journal_rdf(publisher_uri,journal_uri):
     publisher_journal_template = tempita.Template("""
     <rdf:Description rdf:about="{{publisher_uri}}">
         <core:publisherOf  rdf:resource="{{journal_uri}}"/>
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
     <rdf:Description rdf:about="{{journal_uri}}">
         <core:publisher rdf:resource="{{publisher_uri}}"/>
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -710,7 +716,7 @@ def make_author_rdf(value,title):
         {{if isUF:}}
             <rdf:type rdf:resource="http://vivo.ufl.edu/ontology/vivo-ufl/UFEntity"/>
         {{endif}}
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -721,7 +727,7 @@ def make_author_rdf(value,title):
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
-        <ufVivo:harvestedBy>Python Pubs version 1.1</ufVivo:harvestedBy>
+        <ufVivo:harvestedBy>Python Pubs version 1.2.1</ufVivo:harvestedBy>
         <ufVivo:dateHarvested>{{harvest_datetime}}</ufVivo:dateHarvested>
     </rdf:Description>
 """)
@@ -810,7 +816,10 @@ def make_authorship_rdf(authors,publication_uri):
         author_rank = value[0]
         authorship_uri = vivotools.get_vivo_uri()
         authorship_uris[author] = authorship_uri
-        author_uri = value[9]
+        if value[8] == "Disambig":
+            author_uri = value[9].split(";")[0] # take first URI if multiple
+        else:
+            author_uri = value[9]
         corresponding_author = value[1]
         harvest_datetime = make_harvest_datetime()
         rdf = rdf + "\n<!-- Authorship for " + author + "-->"
@@ -833,7 +842,10 @@ def make_author_in_authorship_rdf(authors,authorship_uris):
 """)
     rdf = ""
     for author,value in authors.items():
-        author_uri = value[9]
+        if value[8] == "Disambig":
+            author_uri = value[9].split(";")[0] # take first URI if multiple
+        else:
+            author_uri = value[9]
         authorship_uri = authorship_uris[author]
         harvest_datetime = make_harvest_datetime()
         rdf = rdf + "\n<!-- AuthorshipInAuthorship for " + author + "-->"
