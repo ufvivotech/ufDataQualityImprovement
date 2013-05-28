@@ -22,6 +22,7 @@ import sys
 import fileinput
 for line in fileinput.input():
     line = line.replace('ADIS INT LTD','ADIS INTERNATIONAL LIMITED')
+    line = line.replace('SAUDI THORACIC SOC','SAUDI THORACIC SOCIETY')
     line = line.replace('KOREAN NEUROLOGICAL ASSOC','KOREAN NEUROLOGICAL ASSOCIATION')
     line = line.replace('SOC APPLIED SPECTROSCOPY','SOCIETY FOR APPLIED SPECTROSCOPY')
     line = line.replace('AMER SOC NEPHROLOGY','AMERICAN SOCIETY OF NEPHROLOGY')
