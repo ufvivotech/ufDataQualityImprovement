@@ -22,6 +22,8 @@ import sys
 import fileinput
 for line in fileinput.input():
     line = line.replace('ADIS INT LTD','ADIS INTERNATIONAL LIMITED')
+    line = line.replace('AMER JOURNAL HEALTH PROMOTION INC','AMERICAN JOURNAL OF HEALTH PROMOTION INC')
+    line = line.replace('ICE PUBLISHING','INSTITUTION OF CIVIL ENGINEERS PUBLISHING')
     line = line.replace('BRITISH HERPETOL SOC','BRITISH HERPETOL SOCIETY')
     line = line.replace('IGI PUBL','IGI PUBLISHER')
     line = line.replace('INT FOOD and AGRIBUSINESS MANAGEMENT REVIEW','INTERNATIONAL FOOD AND AGRIBUSINESS MANAGEMENT REVIEW')
