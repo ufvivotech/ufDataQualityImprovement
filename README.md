@@ -1,13 +1,10 @@
 # UF Data Quality Improvement
 
-Project to improve UF VIVO data quality and accuracy.  Python programs and SPARQL scripts are used to find and fix data quality issues.  Additional Python programs support basic ingest for UF data sources.  See the project wiki for additional information. Project folders are described below.
+Project to improve UF VIVO data quality and accuracy.  This git repository is for data quality issues and a project wiki.
+
+For software related to data cleaning, see [Mike's GitHub Repositories](http://github.com/mconlon17) and (Some VIVO Things)[http://mconlon17.github.io]  
 
 For more information on VIVO, see [the VIVO web site](http://vivoweb.org)
 
-## Papers
+Join us at the (2014 VIVO Conference)[http://vivoconference.org], August 6-8 in Austin, Texas!
 
-Python programs and SPARQL scripts to manage publications in VIVO.  UF uses BibTex as an input format.
-
-## vivotools
-
-vivotools is a library of python tools useful for VIVO.
