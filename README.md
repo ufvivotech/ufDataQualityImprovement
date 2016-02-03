@@ -6,7 +6,7 @@ For software related to data cleaning, see [Mike's GitHub Repositories](http://g
 
 For more information on VIVO, see [the VIVO web site](http://vivoweb.org)
 
-Join us at the [2015 VIVO Conference](http://vivoconference.org), August 12-14 in Boston, Massachusetts!
+Join us at the [2016 VIVO Conference](http://vivoconference.org), August 17-19 in Denver, Colorado!
 
 VIVO is a project of [Duraspace](http://duraspace.org)
 
